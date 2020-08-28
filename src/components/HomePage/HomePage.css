@@ -1,0 +1,41 @@
+
+.trending-section-heading > select{
+    font-size: 18px;
+    margin-left: 1em;
+    padding: 4px 12px;
+    border-radius: 5px;   
+    border: none;
+    
+    color: rgb(18, 19, 26);
+    background-color: rgb(234, 237, 255);
+    transition: background-color 0.35s;
+}
+.trending-section-heading > select:hover{
+    outline: none;
+    background-color: rgb(246, 247, 255);    
+}
+.trending-section-heading > select:focus{
+    outline: none;   
+}
+.trending-section-heading > select > option{
+    background-color: rgba(234, 237, 255, 0.85);
+    font-size: 14px;
+}
+
+.trending-section-heading .btn-group .btn{
+    background-color: rgba(234, 237, 255, 0.75);
+    color: rgb(18, 19, 26);
+    border:none;
+}
+
+.trending-section-heading .btn-group .btn:hover{
+    background-color: rgba(234, 237, 255, 0.85);
+    border:none;
+}
+.trending-section-heading .btn-group .btn.selected{    
+    background-color: rgb(234, 237, 255);
+    border:none;
+}
+.trending-section-heading .btn-group .btn.selected:hover{    
+    background-color: rgb(246, 247, 255); 
+}

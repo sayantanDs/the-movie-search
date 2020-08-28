@@ -1,0 +1,37 @@
+.movie-card{
+    width: 156px;
+    padding: 0px;
+    transition: transform 0.35s;
+}
+.movie-card:hover{
+    transform: scale(1.04);
+}
+
+.movie-card_genres > span:nth-child(n+2)::before{
+    content: " | ";
+    font-size: 10px;
+}
+.movie-card_poster{
+    
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
+    transition: box-shadow 0.35s
+}
+.movie-card:hover .movie-card_poster{
+    box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.7); 
+}
+
+.movie-card_info{
+    padding-top: 5px;
+    padding-left: 5px;
+    font-size: 11px;
+    color: rgba(200, 209, 255, 0.5);
+}
+.movie-card_title{
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(234, 237, 255);
+}
+.movie-card_release{
+    font-weight: bold;
+    font-size: 12px;
+}
