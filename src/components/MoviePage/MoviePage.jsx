@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import useCachedApiCall from "../../CustomHooks/useCachedApiCall";
 import RatingRing from "../RatingRing/RatingRing";
-import MovieCard from "../MovieCard/MovieCard";
+import MovieGalleryHorizontal from "../GalleryHorizontal/MovieGalleryHorizontal";
+import VideoGallery from "../GalleryHorizontal/VideoGallery";
+import SeasonsGallery from "../GalleryHorizontal/SeasonsGallery";
 import {get_poster_url, get_backdrop_url, get_profile_url, format_date} from "../../utilities";
 import "./MoviePage.css";
 
@@ -10,6 +12,12 @@ import {movie_details_placeholder} from "../../placeholders";
 
 // the top thingy with backdrop image and poster, calling it dashboard..
 const Dashboard = ({movie}) => {
+    const runtime = movie.runtime || movie.episode_run_time || "0";
+    const release_date = movie.release_date || movie.first_air_date;
+    const title = movie.title || movie.name || movie.original_title || movie.original_name;
+    const rating_percent = ("vote_average" in movie) ? (parseFloat(movie.vote_average)*10) : null;
+    const languages = (movie.spoken_languages && movie.spoken_languages.map(l=>l.name)) || movie.languages;
+    const seasons = movie.number_of_seasons && (`${movie.number_of_seasons} Season${(movie.number_of_seasons>1)?"s":""}`);
     
     const backdrop_style = {
         backgroundImage: (movie.backdrop_path)?(`url("${get_backdrop_url(movie.backdrop_path, 2)}"), `+"linear-gradient(transparent, rgb(30,30,40) 50%, black)"):"linear-gradient(transparent, black)",
@@ -20,28 +28,28 @@ const Dashboard = ({movie}) => {
         <div style={backdrop_style} className="backdrop movie-page_dashboard"> 
                         
             <div className="movie-page_dashboard-poster-section">
-                <div className="movie-page_dashboard-poster">
+                <div className="poster-bg">
                     {movie.poster_path && <img src={get_poster_url(movie.poster_path, 2)} alt="movie poster"/>}
                 </div>
             </div>
             <div className="movie-page_dashboard-info">
                                 
-                
-                <div className="movie-page_title">{movie.title || movie.original_title || movie.original_name}</div>
-                {movie.genres && <div className="movie-page_genres">{movie.genres.map((g, i)=><span key={i}>{g.name}</span>)}</div>}
-                
-                <div className="my-3">
-                    {movie.release_date && <div>{format_date(movie.release_date)}</div>}
-                    {movie.runtime && <div>{movie.runtime} mins</div>}
-                    {movie.spoken_languages && <div>{movie.spoken_languages.map((l)=>l.name).join(", ")}</div>}
-                </div>
-                
-                
-
                 {/* <div>IMDb: 6.9</div> */}
+                {rating_percent &&
                 <div className="py-2">
-                    <RatingRing size={50} percent={parseFloat(movie.vote_average)*10}/>
-                </div>                    
+                    <RatingRing size={50} percent={rating_percent}/>
+                </div>}
+            
+                <div className="my-3">
+                    {release_date && <div>{format_date(release_date)}</div>}
+                    {runtime!=0 && <div>{runtime} mins</div>}
+                    {languages && <div>{languages.join(", ")}</div>}
+                    {seasons && <div>{seasons}</div>}
+                </div>
+
+                {movie.genres && <div className="movie-page_genres">{movie.genres.map((g, i)=><span key={i}>{g.name}</span>)}</div>}
+                <div className="movie-page_title">{title}</div>
+                
                 
             </div> 
         </div>
@@ -77,18 +85,31 @@ const CastList = ({credits}) => {
     );
 }
 
-
+const VideoSection = ({videos}) => {
+    return (
+            <React.Fragment>
+                {videos && videos.results && videos.results.length &&
+                    <div className="section">
+                        <div className="section-heading">Videos</div>
+                        <VideoGallery videos={videos.results}/>
+                    </div>
+                }
+            </React.Fragment>  
+    );
+}
 
 const MoviePage = ({match}) => {
     const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
     const id = match.params.id;
+    const  media_type = match.params.media_type;
+
     const movieData = useCachedApiCall(API_KEY, "https://api.themoviedb.org/3");
     const movie = movieData.response;
     // const movie = movie_details_placeholder;    
     
     useEffect(()=>{
-        movieData.apiCall(`/movie/${id}?append_to_response=credits,external_ids,videos,recommendations,similar,reviews`);
-    },[match.params.id]);
+        movieData.apiCall(`/${media_type}/${id}?append_to_response=credits,external_ids,videos,recommendations,similar,reviews`);
+    },[match.params.id, match.params.media_type]);
 
     
 
@@ -104,30 +125,36 @@ const MoviePage = ({match}) => {
             {movie &&
                 <div>
                     <Dashboard movie={movie}/>
+                    
                     <div className="movie-page_layout-grid"> 
                         <div className="section">
                             <div className="section-heading">Plot</div>
-                            <div>{movie.overview}</div>                                
+                            <div>{movie.overview}</div>                                                           
                         </div> 
                         <CastList credits={movie.credits}/> 
                     </div> 
-                    
+
+                    {movie.seasons && 
+                        <div className="section">
+                            <div className="section-heading">Seasons</div>
+                            <SeasonsGallery seasons={movie.seasons}/>
+                        </div>
+                    }
+
+                    <VideoSection videos={movie.videos}/> 
+
                     {/*--------------------- Recommended section------------------------- */}
-                    {movie.recommendations && movie.recommendations.results &&
+                    {movie.recommendations && movie.recommendations.results && movie.recommendations.results.length!==0 &&
                         <div className="section">
                             <div className="section-heading">You may also like</div>
-                            <div className="movie-list">
-                                {movie.recommendations.results.map((m, i)=><MovieCard key={i} movie={m} media_type="movie"/>)}
-                            </div>                            
+                            <MovieGalleryHorizontal movies={movie.recommendations.results} media_type={media_type}/>
                         </div>                        
                     }
 
-                    {movie.similar && movie.similar.results &&
+                    {movie.similar && movie.similar.results && movie.similar.results.length!==0 &&
                         <div className="section">
                             <div className="section-heading">Similar</div>
-                            <div className="movie-list">
-                                {movie.similar.results.map((m, i)=><MovieCard key={i} movie={m}  media_type="movie"/>)}
-                            </div>                            
+                            <MovieGalleryHorizontal movies={movie.similar.results}  media_type={media_type}/>                            
                         </div>                        
                     }
                     

@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch, Redirect} from 'react-router-dom';
 import useCachedApiCall from "./CustomHooks/useCachedApiCall";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage/HomePage";
 import MoviePage from "./components/MoviePage/MoviePage";
-import SeriesPage from "./components/SeriesPage/SeriesPage";
 
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
@@ -22,8 +21,17 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/" render={props=><HomePage {...props} trendingData={trendingData}/>}/>
-            <Route exact path="/movie/:id" render={props=><MoviePage {...props}/>}/>
-            <Route exact path="/tv/:id" render={props=><SeriesPage {...props}/>}/>
+            <Route exact path="/:media_type/:id" 
+                  render={(props)=>{
+                      switch(props.match.params.media_type){
+                        case "movie":
+                        case "tv":
+                          return <MoviePage {...props}/>
+                        default:
+                          return <Redirect to="/"/>
+                      }
+                  }}
+            />
           </Switch>       
         </main>
       </div>

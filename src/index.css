@@ -17,15 +17,6 @@ body{
   margin: 25px 30px;
 }
 
-.movie-list{
-  padding: 30px 10px 10px 10px;
-  display:flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-.movie-list > *{
-  margin-left: 50px;
-}
 
 .error-msg{
   color: rgba(234, 237, 255, 0.35);
@@ -74,7 +65,7 @@ body{
 }
 
 .section{
-  margin: 50px 35px;
+  margin: 60px 20px;
 }
 .section-heading{
   color: rgb(234, 237, 255);
@@ -82,4 +73,10 @@ body{
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 576px){
+  .section{
+    margin: 60px 40px;
+  }
 }

@@ -1,0 +1,45 @@
+.gallery-h-scrollarea{
+    padding: 30px 10px 10px 10px;
+    display:flex;
+    overflow: hidden;
+    border-left: 1px solid rgba(228, 234, 255, 0.1);
+    border-right: 1px solid rgba(228, 234, 255, 0.1);
+    /* overflow-x:auto; */
+}
+
+.gallery-h{
+    display: grid;
+    grid-template-columns: 35px auto 35px;
+    /* background-color: rgba(228, 234, 255, 0.05); */
+}
+.gallery-h-scrollarea > *{
+    margin: 0px 20px;
+}
+.gallery-h-scrollarea > *:first-child{
+    margin-left: 60px;
+}
+.gallery-h-scrollarea > *:last-child::after{
+    content: "";
+    padding-left: 40px;
+}
+
+
+
+.gallery-h > button{
+    /* align-self: center; */
+    /* border-radius: 50%; */
+    padding: 3px;
+    /* margin:3px; */
+    border: none;
+    /* background-color: rgba(228, 234, 255, 0.2); */
+    background-color: transparent;
+    background-image: linear-gradient(transparent, rgba(228, 234, 255, 0.2), transparent);
+    color: rgba(228, 234, 255);
+    transition: background-color 0.3s;
+}
+.gallery-h > button:focus{
+    outline: none;
+}
+.gallery-h > button:hover{
+    background-color: rgba(228, 234, 255, 0.3);
+}
