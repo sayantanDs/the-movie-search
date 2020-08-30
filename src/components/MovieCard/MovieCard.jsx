@@ -6,7 +6,7 @@ import {get_poster_url} from "../../utilities";
 import "./MovieCard.css";
 
 const MovieCard = ({movie, media_type}) => {
-    const title = movie.title || movie.original_title || movie.original_name;
+    const title = movie.title || movie.name || movie.original_title || movie.original_name;
     const rating_percent = ("vote_average" in movie) ? (parseFloat(movie.vote_average)*10) : null;
     const release_date = movie.release_date || movie.first_air_date;
     const release_year = release_date && release_date.substr(0, 4);
