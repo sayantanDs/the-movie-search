@@ -12,7 +12,7 @@ import {movie_details_placeholder} from "../../placeholders";
 
 // the top thingy with backdrop image and poster, calling it dashboard..
 const Dashboard = ({movie}) => {
-    const runtime = movie.runtime || movie.episode_run_time || "0";
+    const runtime = movie.runtime || movie.episode_run_time.join(", ") || "0";
     const release_date = movie.release_date || movie.first_air_date;
     const title = movie.title || movie.name || movie.original_title || movie.original_name;
     const rating_percent = ("vote_average" in movie) ? (parseFloat(movie.vote_average)*10) : null;
