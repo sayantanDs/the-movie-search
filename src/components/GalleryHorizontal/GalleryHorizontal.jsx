@@ -8,15 +8,18 @@ const GalleryHorizontal = (component) => {
     //     scrollArea.current.scrollLeft += 20;
     // },[]);
 
+    const scroll_offset = 100;
     const onLeft = () => {
         let current_pos =  scrollArea.current.scrollLeft;
-        let scroll_ammount = scrollArea.current.clientWidth - 150;
-        scrollArea.current.scrollTo({left: current_pos - scroll_ammount, behavior: "smooth"});
+        let w = scrollArea.current.clientWidth;
+        let scroll_amount = w - ((w > (scroll_offset*2))?scroll_offset:0);
+        scrollArea.current.scrollTo({left: current_pos - scroll_amount, behavior: "smooth"});
     }
     const onRight = () => {
         let current_pos =  scrollArea.current.scrollLeft;
-        let scroll_ammount = scrollArea.current.clientWidth - 150;
-        scrollArea.current.scrollTo({left: current_pos + scroll_ammount, behavior: "smooth"});
+        let w = scrollArea.current.clientWidth;
+        let scroll_amount = w - ((w > (scroll_offset*2))?scroll_offset:0);
+        scrollArea.current.scrollTo({left: current_pos + scroll_amount, behavior: "smooth"});
     }
 
     return ( 

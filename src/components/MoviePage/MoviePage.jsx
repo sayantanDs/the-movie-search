@@ -4,7 +4,7 @@ import RatingRing from "../RatingRing/RatingRing";
 import MovieGalleryHorizontal from "../GalleryHorizontal/MovieGalleryHorizontal";
 import VideoGallery from "../GalleryHorizontal/VideoGallery";
 import SeasonsGallery from "../GalleryHorizontal/SeasonsGallery";
-import {get_poster_url, get_backdrop_url, get_profile_url, format_date} from "../../utilities";
+import {get_poster_url, get_backdrop_url, get_profile_url, format_date, get_lang_name} from "../../utilities";
 import "./MoviePage.css";
 
 import {movie_details_placeholder} from "../../placeholders";
@@ -16,7 +16,11 @@ const Dashboard = ({movie}) => {
     const release_date = movie.release_date || movie.first_air_date;
     const title = movie.title || movie.name || movie.original_title || movie.original_name;
     const rating_percent = ("vote_average" in movie) ? (parseFloat(movie.vote_average)*10) : null;
-    const languages = (movie.spoken_languages && movie.spoken_languages.map(l=>l.name)) || movie.languages;
+    
+    const movie_lang = (movie.spoken_languages && movie.spoken_languages.map(lang=>(get_lang_name(lang.iso_639_1)||lang.name)));
+    const tv_lang = (movie.languages && movie.languages.map(get_lang_name));
+    const languages = (movie_lang || tv_lang);
+    
     const seasons = movie.number_of_seasons && (`${movie.number_of_seasons} Season${(movie.number_of_seasons>1)?"s":""}`);
     
     const backdrop_style = {
@@ -108,7 +112,7 @@ const MoviePage = ({match}) => {
     // const movie = movie_details_placeholder;    
     
     useEffect(()=>{
-        movieData.apiCall(`/${media_type}/${id}?append_to_response=credits,external_ids,videos,recommendations,similar,reviews`);
+        movieData.apiCall(`/${media_type}/${id}?append_to_response=credits,external_ids,videos,recommendations,similar,reviews&language=en`);
     },[match.params.id, match.params.media_type]);
 
     
