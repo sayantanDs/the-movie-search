@@ -5,6 +5,9 @@ import MovieGalleryHorizontal from "../GalleryHorizontal/MovieGalleryHorizontal"
 import VideoGallery from "../GalleryHorizontal/VideoGallery";
 import SeasonsGallery from "../GalleryHorizontal/SeasonsGallery";
 import {get_poster_url, get_backdrop_url, get_profile_url, format_date, get_lang_name} from "../../utilities";
+import male_icon from "./male-64.png";
+import female_icon from "./female-64.png";
+import generic_icon from "./generic.png";
 import "./MoviePage.css";
 
 import {movie_details_placeholder} from "../../placeholders";
@@ -24,7 +27,7 @@ const Dashboard = ({movie}) => {
     const seasons = movie.number_of_seasons && (`${movie.number_of_seasons} Season${(movie.number_of_seasons>1)?"s":""}`);
     
     const backdrop_style = {
-        backgroundImage: (movie.backdrop_path)?(`url("${get_backdrop_url(movie.backdrop_path, 2)}"), `+"linear-gradient(transparent, rgb(30,30,40) 50%, black)"):"linear-gradient(transparent, black)",
+        backgroundImage: (movie.backdrop_path)?(`url("${get_backdrop_url(movie.backdrop_path, 2)}"), linear-gradient(transparent, rgb(30,30,40) 50%, black)`):"linear-gradient(transparent, black)",
         backgroundBlendMode: "overlay"
     }
 
@@ -60,6 +63,51 @@ const Dashboard = ({movie}) => {
     );
 }
 
+const Profile = ({cast}) => {
+    const get_profile_pic = () => {
+        if(cast.profile_path)
+            return get_profile_url(cast.profile_path);
+        else if("gender" in cast && cast.gender!==null)
+        {
+            return (cast.gender===2)? male_icon : female_icon
+        }
+        else{
+            return generic_icon;
+        }
+    }
+    return <img src={get_profile_pic()} alt="" className="profile-pic"/>;
+}
+
+const FullCastCrew = ({credits}) => {
+    const cast_list = credits && credits.cast;
+    const crew_list = credits && credits.crew;
+    return (
+        <div className="modal fade" id="fullCastCrewModal">
+            <div className="modal-dialog modal-lg modal-dialog-scrollable">
+                <div className="modal-content">
+                
+                    <div className="modal-header">
+                        <div className="modal-title">Cast and Crew</div>
+                        <button type="button" className="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <div className="modal-body">
+                        <div className="list-heading">Cast</div>
+                        <ul className="cast-list">
+                        {cast_list && cast_list.map((cast, i)=><li key={i}><Profile cast={cast}/><span className="cast-name">{cast.name}</span><span className="cast-role">{cast.character}</span></li>)}
+                        </ul>
+                        <div className="list-heading">Crew</div>
+                        <ul className="cast-list">
+                        {crew_list && crew_list.map((crew, i)=><li key={i}><Profile cast={crew}/><span className="cast-name">{crew.name}</span><span className="cast-role">{crew.job}</span></li>)}
+                        </ul>
+                    </div>                
+
+                </div>
+            </div>
+        </div>
+    );
+}
+
 const CastList = ({credits}) => {
     const cast_list = credits && credits.cast;
     const cast_list_limit = 5;
@@ -75,14 +123,17 @@ const CastList = ({credits}) => {
                             if(i<cast_list_limit){
                                 return (
                                     <li key={i}>
-                                        <img src={get_profile_url(cast.profile_path)} alt=""/>
+                                        {/* <img src={get_profile_url(cast.profile_path)} alt=""/> */}
+                                        <Profile cast={cast}/>
                                         {cast.name}
                                     </li>
-                                )
+                                );
                             }
                         })
                     }
                 </ul>
+                <button className="more-cast-btn" data-toggle="modal" data-target="#fullCastCrewModal">See more...</button>
+                <FullCastCrew credits={credits}/>
             </div>
         }
         </React.Fragment>        

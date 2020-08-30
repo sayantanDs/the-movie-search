@@ -55,14 +55,64 @@
     padding: 8px 0px 3px 0px;
     color: rgba(234, 237, 255, 0.8);
 }
-.cast-list > li > img{
+.profile-pic{
     height: 45px;
     width: 45px;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 10px;
+    background-color: rgba(234, 237, 255, 0.32);
 }
 
+#fullCastCrewModal .modal-content{
+    background-color: rgba(56,73,110, 0.95);
+}
+#fullCastCrewModal .modal-header{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(234, 237, 255, 0.4);
+}
+
+#fullCastCrewModal .modal-body{
+    padding-left:0px;
+    padding-right: 0px;
+}
+#fullCastCrewModal .modal-body li{
+    padding: 8px 10px;
+}
+#fullCastCrewModal .modal-body li:nth-child(odd){
+    background-color: rgba(234, 237, 255, 0.03);        
+}
+
+#fullCastCrewModal li{
+    display:flex;
+    align-items: center;
+}
+#fullCastCrewModal .cast-name{
+    flex-grow: 1;
+}
+#fullCastCrewModal .cast-role{
+    font-size: 14px;
+    color: rgba(234, 237, 255, 0.6);
+}
+#fullCastCrewModal .list-heading{
+    padding-left: 16px;
+    padding-bottom: 8px;
+    margin: 8px 16px 20px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+#fullCastCrewModal .modal-body ul{
+    margin-bottom: 50px;
+}
+.more-cast-btn{
+    background-color: transparent;
+    border:none;
+    color: rgba(234, 237, 255, 0.7);
+    padding: 0px;
+}
+.more-cast-btn:focus, .more-cast-btn:hover{
+    outline:none;
+    color: rgba(234, 237, 255, 0.85);
+} 
 .video-list{
     height: 250px;
     display: flex;
@@ -74,8 +124,15 @@
 .video-list > div{
     margin-left: 20px;
 }
-
-@media only screen and (min-width: 512px){
+@media only screen and (max-width: 576px){
+    
+    #fullCastCrewModal .list-heading{
+        margin-left: 0px;
+        margin-right: 0px;
+        border-bottom: none;
+    }
+}
+@media only screen and (min-width: 576px){
     .movie-page_dashboard{
         display: grid;
         grid-template-columns: 1fr 3fr;
@@ -94,6 +151,13 @@
     .movie-page_layout-grid{
         display: grid;
         grid-template-columns: 3fr 2fr;
+    }
+}
+
+@media only screen and (min-width: 992px){
+    #fullCastCrewModal .modal-body li{
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }
 
