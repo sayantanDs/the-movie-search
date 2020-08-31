@@ -1,6 +1,28 @@
+:root{
+  --bg-color-1-rgb: rgb(30,30,50);
+  --bg-color-1: 30,30,50;
+  --bg-color-2-rgb: rgb(56,73,110);
+  --bg-color-2: 56,73,110;
+
+  --fg-color-rgb: rgb(234, 237, 255);
+  --fg-color: 234, 237, 255;
+
+  --fg-color-highlight-rgb: rgb(246, 247, 255);
+  --fg-color-highlight: 246, 247, 255;
+
+  --fg-color-2-rgb: rgb(200, 209, 255);
+  --fg-color-2: 200, 209, 255;
+
+  --dark-color-rgb: rgb(10, 14, 30);
+  --dark-color: 10, 14, 30;
+
+  --fine-line-color-rgba: rgba(var(--fg-color), 0.08);
+
+}
+
 body{
-  background-image: linear-gradient(90deg, rgb(30,30,50),rgb(56,73,110) 75%);
-  color: rgb(234, 237, 255);
+  background-image: linear-gradient(90deg, var(--bg-color-1-rgb),var(--bg-color-2-rgb) 75%);
+  color: var(--fg-color-rgb);
 }
 
 .app-header{
@@ -19,7 +41,7 @@ body{
 
 
 .error-msg{
-  color: rgba(234, 237, 255, 0.35);
+  color: rgba(var(--fg-color), 0.35);
   font-size: 18px;
   font-weight: 600;
   text-align: center;
@@ -32,7 +54,7 @@ body{
 }
 
 .poster{
-  background-color: rgb(10, 14, 30);
+  background-color: rgb(var(--dark-color));
   width: 154px;
   height: 231px;
 } 
@@ -46,7 +68,7 @@ body{
   width: 185px;
   height: 278px;
   margin: 15px;
-  background-color: rgb(10, 14, 30);
+  background-color: rgb(var(--dark-color));
 }
 .poster-bg > img{
   width: 185px;
@@ -56,7 +78,7 @@ body{
 
 .poster:empty::after, .poster-bg:empty::after{
   content: "N/A";
-  color: rgba(234, 237, 255, 0.5);
+  color: rgba(var(--fg-color), 0.5);
   font-size: 18px;
   height: 100%;
   display: flex;
@@ -68,10 +90,10 @@ body{
   margin: 60px 20px;
 }
 .section-heading{
-  color: rgb(234, 237, 255);
+  color: var(--fg-color-rgb);
   font-size: 24px;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--fine-line-color-rgba);
   margin-bottom: 16px;
 }
 

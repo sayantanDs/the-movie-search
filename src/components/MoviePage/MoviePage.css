@@ -15,33 +15,20 @@
     align-items: flex-end;
 }
 
-.movie-page_dashboard-poster{
-    width: 185px;
-    height: 278px;
-    margin: 15px;
-    background-color: rgb(10, 14, 30);
-    box-shadow: 0px 0px 15px 5px black;
-}
-.movie-page_dashboard-poster > img{
-    width: 185px;
-    height: 278px;
-    object-fit: contain;
-}
 
 .movie-page_dashboard-info{
     margin:15px 0px;
     display: flex;
-    /* flex-direction: column-reverse; */
     flex-direction: column;
     align-items: center;
     text-align: center;
-    color: rgba(234, 237, 255, 0.75);
+    color: rgba(var(--fg-color), 0.75);
 }
 
 .movie-page_title{
     font-size: 25px;
     font-weight: bold;
-    color: rgb(234, 237, 255);
+    color: var(--fg-color-rgb);
 }
 
 .movie-page_genres > span:nth-child(n+2)::before{
@@ -53,7 +40,7 @@
 }
 .cast-list > li{
     padding: 8px 0px 3px 0px;
-    color: rgba(234, 237, 255, 0.8);
+    color: rgba(var(--fg-color), 0.8);
 }
 .profile-pic{
     height: 45px;
@@ -61,26 +48,42 @@
     object-fit: cover;
     border-radius: 50%;
     margin-right: 10px;
-    background-color: rgba(234, 237, 255, 0.32);
+    background-color: rgba(var(--fg-color), 0.32);
 }
 
 #fullCastCrewModal .modal-content{
-    background-color: rgba(56,73,110, 0.95);
+    background-color: var(--bg-color-2-rgb);
 }
+
 #fullCastCrewModal .modal-header{
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(234, 237, 255, 0.4);
+    border-bottom: 1px solid var(--fine-line-color-rgba);
+    color: rgba(var(--fg-color), 0.4);
 }
 
 #fullCastCrewModal .modal-body{
     padding-left:0px;
     padding-right: 0px;
+    
+    --scrollbarBG: rgba(var(--fg-color), 0.1);
+    --thumbBG: rgba(var(--fg-color), 0.8);
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
 }
+#fullCastCrewModal .modal-body::-webkit-scrollbar{
+    width: 8px;
+}
+#fullCastCrewModal .modal-body::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+#fullCastCrewModal .modal-body::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+}
+
 #fullCastCrewModal .modal-body li{
     padding: 8px 10px;
 }
 #fullCastCrewModal .modal-body li:nth-child(odd){
-    background-color: rgba(234, 237, 255, 0.03);        
+    background-color: rgba(var(--fg-color), 0.03);        
 }
 
 #fullCastCrewModal li{
@@ -92,13 +95,13 @@
 }
 #fullCastCrewModal .cast-role{
     font-size: 14px;
-    color: rgba(234, 237, 255, 0.6);
+    color: rgba(var(--fg-color), 0.6);
 }
 #fullCastCrewModal .list-heading{
     padding-left: 16px;
     padding-bottom: 8px;
     margin: 8px 16px 20px 16px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid var(--fine-line-color-rgba);
 }
 #fullCastCrewModal .modal-body ul{
     margin-bottom: 50px;
@@ -106,12 +109,12 @@
 .more-cast-btn{
     background-color: transparent;
     border:none;
-    color: rgba(234, 237, 255, 0.7);
+    color: rgba(var(--fg-color), 0.7);
     padding: 0px;
 }
 .more-cast-btn:focus, .more-cast-btn:hover{
     outline:none;
-    color: rgba(234, 237, 255, 0.85);
+    color: rgba(var(--fg-color), 0.85);
 } 
 .video-list{
     height: 250px;
@@ -137,10 +140,8 @@
         display: grid;
         grid-template-columns: 1fr 3fr;
         gap: 15px;
-        /* align-items: end; */
     }
     .movie-page_dashboard-info{
-        /* flex-direction: column; */
         text-align: left;
         align-items: start;
         justify-content: flex-end;        

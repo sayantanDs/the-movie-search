@@ -2,12 +2,12 @@
     padding-top: 5px;
     padding-left: 5px;
     font-size: 11px;
-    color: rgba(200, 209, 255, 0.5);
+    color: rgba(var(--fg-color-2), 0.5);
 }
 .season-card_title{
     font-size: 14px;
     font-weight: bold;
-    color: rgb(234, 237, 255);
+    color: var(--fg-color-rgb);
 }
 .season-card_episodes{
     font-weight: bold;

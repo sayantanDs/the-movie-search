@@ -21,12 +21,12 @@ const TrendingSection = ({trendingData})=>{
   return (      
     <div className="section">
         <div className="section-heading trending-section-heading">
-          Popular 
+          <div>Popular</div>           
           <select onChange={(e)=>setTimeWindow(e.target.value)}>
             <option value="day">Today</option>
             <option value="week">This Week</option>
           </select>
-          <div className="btn-group ml-4">
+          <div className="btn-group">
             <button className={"btn"+((mediaType==="movie")?" selected":"")} onClick={()=>setMediaType("movie")}>Movie</button>
             <button className={"btn"+((mediaType==="tv")?" selected":"")} onClick={()=>setMediaType("tv")}>Series</button>
           </div>

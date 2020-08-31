@@ -1,35 +1,60 @@
 .search-form{
-    display: grid;
-    grid-template-columns: 95px auto 40px;
-    gap: 10px;
     margin: 50px 15px;
     padding-bottom: 25px;
-    border-bottom: 1px solid rgba(214, 224, 255, 0.1);
+    border-bottom: 1px solid var(--fine-line-color-rgba);
+}
+.search-form .btn-light{
+    background-color: rgba(var(--fg-color), 0.9);
+    color: rgba(var(--dark-color), 0.7);
+    border: none;
+}
+.search-form .btn-light:hover{
+    background-color: rgba(var(--fg-color), 0.8);
 }
 
-.search-form > input[type="text"]{
+.search-form input[type="text"]{
     border: none;
-    border-radius: 4px;
-    padding-left: 14px;
-}
-.search-form > input[type="text"]:focus{
-    outline:none;
-    border: 2px solid rgb(157, 163, 180);
-}
-.search-bttn{
-    border-radius: 4px;
-    border: none;
-    padding: 2px;
-    font-size: 22px;
-    background-color: rgba(214, 224, 255, 0.6);
-    color: rgb(244, 246, 255);
-    transition: background-color 0.2s;
+    background-color: var(--fg-color-highlight-rgb);
 }
 
-.search-bttn:hover{
-    background-color: rgba(214, 224, 255, 0.4);
-}
 
 .movie-search-pagination{
     margin: 30px 0px;
+}
+
+.movie-search-pagination .page-link{
+    background-color: rgba(var(--fg-color), 0.15);
+    color: rgba(var(--fg-color), 0.8);
+    border: none;  
+    margin-left:5px;   
+    border-radius: 3px;
+    transition: background-color 0.25s;
+}
+.movie-search-pagination .page-link:hover{
+    color: rgba(var(--fg-color), 0.9);
+    background-color: rgba(var(--fg-color), 0.3);
+}
+
+
+.movie-search-pagination .page-item.disabled .page-link{
+    background-color: rgba(var(--fg-color), 0.07);
+    color: rgba(var(--fg-color), 0.5);
+}
+.movie-search-pagination .page-item.active .page-link{
+    background-color: var(--fg-color-rgb);
+    color: var(--dark-color-rgb);
+}
+
+
+@media only screen and (min-width: 768px){
+    .search-form{
+        margin-left: 50px; 
+        margin-right: 50px;
+        display: flex;
+        justify-content: center;
+    }
+    .search-form > div{
+        max-width: 800px;
+    }
+    
 }

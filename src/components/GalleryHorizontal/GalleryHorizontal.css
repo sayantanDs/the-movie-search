@@ -2,11 +2,11 @@
     padding: 30px 10px 10px 10px;
     display:flex;
     overflow: hidden;
-    border-left: 1px solid rgba(228, 234, 255, 0.1);
-    border-right: 1px solid rgba(228, 234, 255, 0.1);
+    border-left: 1px solid var(--fine-line-color-rgba);
+    border-right: 1px solid var(--fine-line-color-rgba);
     overflow-x:auto;
 
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     scroll-padding: 20px;
 
     -ms-overflow-style: none;  /* IE and Edge */
@@ -46,26 +46,26 @@
     padding: 3px;
     border: none;
     background-color: transparent;
-    background-image: linear-gradient(transparent, rgba(228, 234, 255, 0.2), transparent);
+    background-image: linear-gradient(transparent, rgba(var(--fg-color), 0.2), transparent);
     transition: background-color 0.3s;
 }
 .gallery-h > button:focus{
     outline: none;
 }
 .gallery-h > button:hover{
-    background-color: rgba(228, 234, 255, 0.1);
+    background-color: rgba(var(--fg-color), 0.1);
 }
 .gallery-left-arrow{
     width:0;
     height:0;
-    border-right: 9px solid rgb(228, 234, 255);
+    border-right: 9px solid var(--fg-color-rgb);
     border-top: 9px solid transparent;
     border-bottom: 9px solid transparent;
 }
 .gallery-right-arrow{
     width:0;
     height:0;
-    border-left: 9px solid rgb(228, 234, 255);
+    border-left: 9px solid var(--fg-color-rgb);
     border-top: 9px solid transparent;
     border-bottom: 9px solid transparent;
 }

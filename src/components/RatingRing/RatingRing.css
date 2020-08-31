@@ -14,7 +14,7 @@
 }
 
 .rating-ring_percent{
-    color: rgba(209, 216, 241, 0.8);
+    color: rgba(var(--fg-color), 0.75);
     font-weight: bold;
     display: flex;
     align-items: center;

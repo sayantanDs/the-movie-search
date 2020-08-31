@@ -67,7 +67,7 @@ const Profile = ({cast}) => {
     const get_profile_pic = () => {
         if(cast.profile_path)
             return get_profile_url(cast.profile_path);
-        else if("gender" in cast && cast.gender!==null)
+        else if(cast.gender)
         {
             return (cast.gender===2)? male_icon : female_icon
         }
