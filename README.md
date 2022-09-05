@@ -12,7 +12,7 @@ To build and run this you will need [Node.js](https://nodejs.org/en/) and npm in
 
 * Clone the repositry
 * to install dependencies, enter the directory and run ```npm install```
-* to start the server use ```npm start```. This will start a local server on post 3000. Open ```localhost:3000``` in your broweser.
+* to start the server use ```npm start```. This will start a local server on post 3000. Open ```localhost:3000``` in your browser.
 
 ### Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
