@@ -7,7 +7,7 @@ The Movie Search is a responsive [React](https://reactjs.org/) app that shows de
 Visit https://the-movie-search.netlify.app/ for live demo.
 
 
-## Instalation
+## Installation
 To build and run this you will need [Node.js](https://nodejs.org/en/) and npm installed.
 
 * Clone the repositry
